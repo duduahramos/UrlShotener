@@ -19,8 +19,7 @@ namespace Shortener.API.Infrastructure.Services
     
         public async Task<string> GetAsync(string key)
         {
-            // return await _cacheDB.StringGetAsync(key);
-            throw new NotImplementedException();
+            return await _cacheDB.StringGetAsync(key);
         }
     }
 }

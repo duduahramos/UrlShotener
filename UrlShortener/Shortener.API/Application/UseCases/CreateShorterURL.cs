@@ -16,27 +16,25 @@ namespace Shortener.API.Application.UseCases
             _cacheService = cacheService;
         }
 
-        public async Task<UrlResponse> ShortenUrlAndSaveInCache(CreateURLRequest urlRequest)
+        public async Task<UrlResponse> HashUrlAndSaveAsync(CreateURLRequest urlRequest)
         {
             var hashedUrl = _urlManagerService.UrlToHash(urlRequest);
 
-            var saveResult = await _cacheService.SaveAsync(urlRequest.Url, hashedUrl, 1);
+            var saveResult = await _cacheService.SaveAsync(hashedUrl, urlRequest.Url, 1);
             
             return new UrlResponse()
             {
-                Url = hashedUrl,
-                StatusCode = HttpStatusCode.Created
+                Url = hashedUrl
             };
         }
 
-        public UrlResponse ShortenUrlZstd(CreateURLRequest urlRequest)
+        public async Task<UrlResponse>  CompressUrlZstdAndSaveAsync(CreateURLRequest urlRequest)
         {
             var compressedURL = _urlManagerService.CompressUrlWithZstd(urlRequest);
-
+            
             return new UrlResponse()
             {
-                Url = compressedURL,
-                StatusCode = HttpStatusCode.Created
+                Url = compressedURL
             };
         }
     }

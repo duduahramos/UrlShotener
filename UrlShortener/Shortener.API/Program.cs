@@ -4,7 +4,6 @@ using Shortener.API.Application.Interfaces;
 using Shortener.API.Application.Services;
 using Shortener.API.Application.UseCases;
 using Shortener.API.Infra.Services;
-using UrlShortener.API.Application.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,12 +27,12 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddOpenApi();
 
 builder.Services.AddSingleton<IHashManager, XxHashManager>();
 builder.Services.AddSingleton<ICacheService, RedisCacheService>();
 builder.Services.AddSingleton<IUrlManagerService, UrlManagerService>();
+builder.Services.AddSingleton<GetShorterURL>();
 builder.Services.AddSingleton<CreateShorterURL>();
 
 var app = builder.Build();
