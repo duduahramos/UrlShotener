@@ -1,13 +1,12 @@
 using System.Net;
 using System.Text.Json.Serialization;
-
-namespace UrlShortener.API.Application.Contracts.Response
+namespace Shortener.API.Application.Contracts.Response
 {
     public class UrlResponse
     {
-        public string? Url { get; set; }
+        public required string Url { get; set; }
         
         [JsonIgnore]
-        public HttpStatusCode StatusCode { get; set; }
+        public required HttpStatusCode StatusCode { get; set; }
     }
 }

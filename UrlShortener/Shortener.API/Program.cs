@@ -1,9 +1,10 @@
 using Shortener.API.Infrastructure.Services;
 using StackExchange.Redis;
+using Shortener.API.Application.Interfaces;
+using Shortener.API.Application.Services;
+using Shortener.API.Application.UseCases;
+using Shortener.API.Infra.Services;
 using UrlShortener.API.Application.Interfaces;
-using UrlShortener.API.Application.Services;
-using UrlShortener.API.Application.UseCases;
-using UrlShortener.API.Infra.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,6 +1,6 @@
-using UrlShortener.API.Application.Interfaces;
+using Shortener.API.Application.Interfaces;
 
-namespace UrlShortener.API.Infra.Services
+namespace Shortener.API.Infra.Services
 {
     public class ZstdManager : IZstdManager
     {

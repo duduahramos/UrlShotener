@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using UrlShortener.API.Application.Contracts.Requests;
-using UrlShortener.API.Application.UseCases;
+using Shortener.API.Application.Contracts.Requests;
+using Shortener.API.Application.UseCases;
 
-namespace UrlShortener.API.Web.Controllers
+namespace Shortener.API.Web.Controllers
 {
     [ApiController]
     [Route("shortener")]

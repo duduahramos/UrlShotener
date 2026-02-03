@@ -1,7 +1,7 @@
-namespace UrlShortener.API.Application.Interfaces
+namespace Shortener.API.Application.Interfaces
 {
     public interface IHashManager
     {
-        string? XxHash(string input);
+        string XxHash(string input);
     }
 }

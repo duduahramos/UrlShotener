@@ -1,7 +1,7 @@
-using UrlShortener.API.Application.Contracts.Requests;
-using UrlShortener.API.Application.Interfaces;
+using Shortener.API.Application.Contracts.Requests;
+using Shortener.API.Application.Interfaces;
 
-namespace UrlShortener.API.Application.Services
+namespace Shortener.API.Application.Services
 {
     public class UrlManagerService : IUrlManagerService
     {
@@ -12,12 +12,12 @@ namespace UrlShortener.API.Application.Services
             _hashManager = hashManager;
         }
 
-        public string? UrlToHash(CreateURLRequest urlRequest)
+        public string UrlToHash(CreateURLRequest urlRequest)
         {
             return _hashManager.XxHash(urlRequest.Url);
         }
         
-        public string? CompressUrlWithZstd(CreateURLRequest urlRequest)
+        public string CompressUrlWithZstd(CreateURLRequest urlRequest)
         {
             return string.Empty;
         }

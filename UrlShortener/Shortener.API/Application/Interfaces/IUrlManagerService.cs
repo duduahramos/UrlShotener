@@ -1,10 +1,10 @@
-using UrlShortener.API.Application.Contracts.Requests;
+using Shortener.API.Application.Contracts.Requests;
 
-namespace UrlShortener.API.Application.Interfaces
+namespace Shortener.API.Application.Interfaces
 {
     public interface IUrlManagerService
     {
-        string? UrlToHash(CreateURLRequest urlRequest);
-        string? CompressUrlWithZstd(CreateURLRequest urlRequest);
+        string UrlToHash(CreateURLRequest urlRequest);
+        string CompressUrlWithZstd(CreateURLRequest urlRequest);
     }
 }

@@ -1,9 +1,9 @@
 using System.Net;
-using UrlShortener.API.Application.Contracts.Requests;
-using UrlShortener.API.Application.Contracts.Response;
-using UrlShortener.API.Application.Interfaces;
+using Shortener.API.Application.Contracts.Requests;
+using Shortener.API.Application.Contracts.Response;
+using Shortener.API.Application.Interfaces;
 
-namespace UrlShortener.API.Application.UseCases
+namespace Shortener.API.Application.UseCases
 {
     public class CreateShorterURL
     {
@@ -18,13 +18,13 @@ namespace UrlShortener.API.Application.UseCases
 
         public async Task<UrlResponse> ShortenUrlAndSaveInCache(CreateURLRequest urlRequest)
         {
-            var hashedURL = _urlManagerService.UrlToHash(urlRequest);
+            var hashedUrl = _urlManagerService.UrlToHash(urlRequest);
 
-            var saveResult = await _cacheService.SaveAsync(urlRequest.Url, hashedURL, 1);
+            var saveResult = await _cacheService.SaveAsync(urlRequest.Url, hashedUrl, 1);
             
             return new UrlResponse()
             {
-                Url = hashedURL,
+                Url = hashedUrl,
                 StatusCode = HttpStatusCode.Created
             };
         }
