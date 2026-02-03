@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
-using Shortener.API.Application.Contracts.Requests;
-using Shortener.API.Application.UseCases;
+using UrlShortener.API.Application.Contracts.Requests;
+using UrlShortener.API.Application.UseCases;
 
-namespace Shortener.API.Web.Controllers
+namespace UrlShortener.API.Web.Controllers
 {
     [ApiController]
     [Route("shortener")]
@@ -18,7 +18,7 @@ namespace Shortener.API.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> ShortenAsync([FromBody] CreateURLRequest request)
         {
-            var shorterResponse = _createShorterURL.ShortenUrl(request);
+            var shorterResponse = _createShorterURL.ShortenUrlAndSaveInCache(request);
             
             return Ok(shorterResponse);
         }

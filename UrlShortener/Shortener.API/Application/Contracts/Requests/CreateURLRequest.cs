@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Shortener.API.Application.Contracts.Requests
+namespace UrlShortener.API.Application.Contracts.Requests
 {
     public class CreateURLRequest
     {

@@ -1,7 +1,7 @@
 using System.Net;
 using System.Text.Json.Serialization;
 
-namespace Shortener.API.Web.Contracts.Response
+namespace UrlShortener.API.Application.Contracts.Response
 {
     public class UrlResponse
     {

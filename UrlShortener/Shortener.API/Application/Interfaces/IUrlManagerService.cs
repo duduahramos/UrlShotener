@@ -1,6 +1,6 @@
-using Shortener.API.Application.Contracts.Requests;
+using UrlShortener.API.Application.Contracts.Requests;
 
-namespace Shortener.API.Application.Interfaces
+namespace UrlShortener.API.Application.Interfaces
 {
     public interface IUrlManagerService
     {

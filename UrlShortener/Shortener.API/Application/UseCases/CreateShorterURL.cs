@@ -1,23 +1,27 @@
 using System.Net;
-using Shortener.API.Application.Contracts.Requests;
-using Shortener.API.Application.Interfaces;
-using Shortener.API.Web.Contracts.Response;
+using UrlShortener.API.Application.Contracts.Requests;
+using UrlShortener.API.Application.Contracts.Response;
+using UrlShortener.API.Application.Interfaces;
 
-namespace Shortener.API.Application.UseCases
+namespace UrlShortener.API.Application.UseCases
 {
     public class CreateShorterURL
     {
         private readonly IUrlManagerService _urlManagerService;
+        private readonly ICacheService _cacheService;
 
-        public CreateShorterURL(IUrlManagerService urlManagerService)
+        public CreateShorterURL(IUrlManagerService urlManagerService, ICacheService cacheService)
         {
             _urlManagerService = urlManagerService;
+            _cacheService = cacheService;
         }
 
-        public UrlResponse ShortenUrl(CreateURLRequest urlRequest)
+        public async Task<UrlResponse> ShortenUrlAndSaveInCache(CreateURLRequest urlRequest)
         {
             var hashedURL = _urlManagerService.UrlToHash(urlRequest);
 
+            var saveResult = await _cacheService.SaveAsync(urlRequest.Url, hashedURL, 1);
+            
             return new UrlResponse()
             {
                 Url = hashedURL,
