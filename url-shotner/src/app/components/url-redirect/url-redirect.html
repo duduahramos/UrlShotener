@@ -1,0 +1,14 @@
+<div class="loading-container">
+    @if (isLoading) {
+    <div class="spinner"></div>
+    <p>Redirecionando...</p>
+    }
+
+    @if (errorMessage) {
+        <div class="error">
+            <h2>❌ URL não encontrada</h2>
+            <p>{{ errorMessage }}</p>
+            <button (click)="voltarHome()">Voltar</button>
+        </div>
+    }
+</div>
