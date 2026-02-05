@@ -18,23 +18,28 @@ namespace Shortener.API.Application.UseCases
 
         public async Task<UrlResponse> HashUrlAndSaveAsync(CreateURLRequest urlRequest)
         {
-            var hashedUrl = _urlManagerService.UrlToHash(urlRequest);
+            var shortenUrl = _urlManagerService.UrlToHash(urlRequest);
+            var expirationInMinutes = 5;
 
-            var saveResult = await _cacheService.SaveAsync(hashedUrl, urlRequest.Url, 1);
+            var saveResult = await _cacheService.SaveAsync(shortenUrl, urlRequest.OriginalUrl, expirationInMinutes);
             
             return new UrlResponse()
             {
-                Url = hashedUrl
+                OriginalUrl = urlRequest.OriginalUrl,
+                ShortCode = shortenUrl,
+                ExpiresAt = DateTime.UtcNow.AddMinutes(expirationInMinutes).ToString("dd/MM/yyyy HH:mm:ss")
             };
         }
 
         public async Task<UrlResponse>  CompressUrlZstdAndSaveAsync(CreateURLRequest urlRequest)
         {
-            var compressedURL = _urlManagerService.CompressUrlWithZstd(urlRequest);
+            var shortenUrl = _urlManagerService.CompressUrlWithZstd(urlRequest);
             
             return new UrlResponse()
             {
-                Url = compressedURL
+                OriginalUrl = urlRequest.OriginalUrl,
+                ShortCode = shortenUrl,
+                ExpiresAt = ""
             };
         }
     }

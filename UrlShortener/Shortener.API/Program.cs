@@ -3,22 +3,41 @@ using StackExchange.Redis;
 using Shortener.API.Application.Interfaces;
 using Shortener.API.Application.Services;
 using Shortener.API.Application.UseCases;
-using Shortener.API.Infra.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// ========================================
+// ADICIONAR: Configurar CORS
+// ========================================
+var frontEndOrigin = builder.Configuration["Cors:FrontEndOrigin"];
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", angularPolicy =>
+    {
+        angularPolicy
+            .WithOrigins(frontEndOrigin)
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+// ========================================
+
+
 builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
 {
     var configuration = sp.GetRequiredService<IConfiguration>();
-    
+
     var options = ConfigurationOptions.Parse(
         configuration["Redis:ConnectionString"]!
     );
-    
+
     options.Password = configuration["Redis:Password"];
     options.AbortOnConnectFail = false;
-    
+
     return ConnectionMultiplexer.Connect(options);
 });
 
@@ -37,6 +56,8 @@ builder.Services.AddSingleton<CreateShorterURL>();
 
 var app = builder.Build();
 
+app.UseCors("AllowAngular");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -45,7 +66,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

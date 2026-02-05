@@ -4,6 +4,11 @@ namespace Shortener.API.Application.Contracts.Response
 {
     public class UrlResponse
     {
-        public required string Url { get; set; }
+        public required string OriginalUrl { get; set; }
+
+        public required string ShortCode { get; set; }
+
+        public required string ExpiresAt { get; set; }
+        
     }
 }

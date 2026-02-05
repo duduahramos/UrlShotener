@@ -28,9 +28,9 @@ namespace Shortener.API.Web.Controllers
         [HttpGet("/{urlKey}")]
         public async Task<IActionResult> GetShortedUrlAsync([FromRoute] string urlKey)
         {
-            var shortedUrl = await _getShorterURL.GetShortedUrlAsync(urlKey);
+            var urlResponse = await _getShorterURL.GetShortedUrlAsync(urlKey);
 
-            return Redirect(shortedUrl.Url);
+            return Ok(urlResponse);
         }
     }
 }

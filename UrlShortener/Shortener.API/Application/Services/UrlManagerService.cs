@@ -14,7 +14,7 @@ namespace Shortener.API.Application.Services
 
         public string UrlToHash(CreateURLRequest urlRequest)
         {
-            return _hashManager.XxHash(urlRequest.Url);
+            return _hashManager.XxHash(urlRequest.OriginalUrl);
         }
         
         public string CompressUrlWithZstd(CreateURLRequest urlRequest)

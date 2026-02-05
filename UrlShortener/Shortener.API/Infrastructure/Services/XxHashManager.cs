@@ -2,7 +2,7 @@ using System.IO.Hashing;
 using System.Text;
 using Shortener.API.Application.Interfaces;
 
-namespace Shortener.API.Infra.Services
+namespace Shortener.API.Infrastructure.Services
 {
     public class XxHashManager : IHashManager
     {

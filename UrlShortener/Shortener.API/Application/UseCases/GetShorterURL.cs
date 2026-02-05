@@ -15,11 +15,13 @@ namespace Shortener.API.Application.UseCases
 
         public async Task<UrlResponse> GetShortedUrlAsync(string urlKey)
         {
-            var shortedUrl = await _cacheService.GetAsync(urlKey);
+            var originalUrl = await _cacheService.GetAsync(urlKey);
             
             return new UrlResponse()
             {
-                Url = shortedUrl
+                OriginalUrl = originalUrl,
+                ShortCode = urlKey,
+                ExpiresAt = ""
             };
         }
     }
