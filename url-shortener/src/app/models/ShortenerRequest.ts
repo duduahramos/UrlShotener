@@ -1,0 +1,3 @@
+interface ShortenerRequest {
+    originalUrl: string;
+}

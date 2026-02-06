@@ -1,0 +1,36 @@
+<!-- url-result/url-result.html -->
+<div class="container">
+  <h1>⚡ URL Shortener</h1>
+
+  <div class="resultado">
+    <h3>✅ URL Encurtada com Sucesso!</h3>
+
+    <div class="info-section">
+      <label>URL Original:</label>
+      <p class="original-url">
+        <a href="{{ shortenerResponse?.originalUrl }}" target="_blank">
+          {{ shortenerResponse?.originalUrl }}
+        </a>
+      </p>
+
+      <label>Expiration time:</label>
+      <p class="original-url">
+          {{ shortenerResponse?.expiresAt }}
+      </p>
+    </div>
+
+    <div class="url-encurtada-section">
+      <label>URL Encurtada:</label>
+      <div class="url-box">
+        <span class="url-texto"><a href="{{ shortedUrl }}" target="_blank">{{ shortedUrl }}</a></span>
+        <button class="btn-copiar" (click)="copiar()">
+          📋 Copiar
+        </button>
+      </div>
+    </div>
+
+    <button class="btn-primary" (click)="novaUrl()">
+      🔙 Encurtar Nova URL
+    </button>
+  </div>
+</div>

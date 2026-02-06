@@ -1,0 +1,25 @@
+<div class="container">
+  <h1>⚡ URL Shortener</h1>
+  <p>Encurte suas URLs de forma rápida e fácil</p>
+
+  <div class="form-group">
+    <input type="text" class="input-url" [(ngModel)]="url" placeholder="https://exemplo.com.br"
+      (keyup.enter)="encurtar()" [disabled]="isLoading" />
+
+    <button class="btn-primary" (click)="encurtar()" [disabled]="!url || isLoading">
+      @if (isLoading) {
+      <span class="spinner"></span>
+      Processando...
+      } @else {
+      Encurtar URL
+      }
+    </button>
+  </div>
+
+  <!-- Mensagem de Erro -->
+  @if (error) {
+  <div class="erro">
+    ❌ {{ error }}
+  </div>
+  }
+</div>
