@@ -1,15 +1,24 @@
 <!-- url-result/url-result.html -->
 <div class="container">
   <h1>⚡ URL Shortner</h1>
-  
+
   <div class="resultado">
     <h3>✅ URL Encurtada com Sucesso!</h3>
-    
+
     <div class="info-section">
       <label>URL Original:</label>
-      <p class="original-url">{{ shortnerResponse?.originalUrl }}</p>
+      <p class="original-url">
+        <a href="{{ shortnerResponse?.originalUrl }}" target="_blank">
+          {{ shortnerResponse?.originalUrl }}
+        </a>
+      </p>
+
+      <label>Expiration time:</label>
+      <p class="original-url">
+          {{ shortnerResponse?.expiresAt }}
+      </p>
     </div>
-    
+
     <div class="url-encurtada-section">
       <label>URL Encurtada:</label>
       <div class="url-box">
@@ -19,7 +28,7 @@
         </button>
       </div>
     </div>
-    
+
     <button class="btn-primary" (click)="novaUrl()">
       🔙 Encurtar Nova URL
     </button>

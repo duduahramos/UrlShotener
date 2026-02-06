@@ -12,9 +12,9 @@ namespace Shortner.API.Infrastructure.Services
             _cacheDB = redis.GetDatabase();
         }
         
-        public Task<bool> SaveAsync(string key, string value, int expirationInMinutes)
+        public Task<bool> SaveAsync(string key, string value, int _urlExpirationInSeconds)
         {
-            return _cacheDB.StringSetAsync(key, value, TimeSpan.FromMinutes(expirationInMinutes));
+            return _cacheDB.StringSetAsync(key, value, TimeSpan.FromSeconds(_urlExpirationInSeconds));
         }
     
         public async Task<string> GetAsync(string key)

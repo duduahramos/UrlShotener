@@ -9,36 +9,37 @@ namespace Shortner.API.Application.UseCases
     {
         private readonly IUrlManagerService _urlManagerService;
         private readonly ICacheService _cacheService;
+        private readonly int _urlExpirationInSeconds;
 
-        public CreateShorterURL(IUrlManagerService urlManagerService, ICacheService cacheService)
+        public CreateShorterURL(IUrlManagerService urlManagerService, ICacheService cacheService, IConfiguration configuration)
         {
             _urlManagerService = urlManagerService;
             _cacheService = cacheService;
+            _urlExpirationInSeconds = configuration.GetValue<int>("Redis:UrlExpirationInSeconds");
         }
 
         public async Task<UrlResponse> HashUrlAndSaveAsync(CreateURLRequest urlRequest)
         {
-            var shortnUrl = _urlManagerService.UrlToHash(urlRequest);
-            var expirationInMinutes = 5;
+            var shorterUrl = _urlManagerService.UrlToHash(urlRequest);
 
-            var saveResult = await _cacheService.SaveAsync(shortnUrl, urlRequest.OriginalUrl, expirationInMinutes);
-            
+            var saveResult = await _cacheService.SaveAsync(shorterUrl, urlRequest.OriginalUrl, _urlExpirationInSeconds);
+
             return new UrlResponse()
             {
                 OriginalUrl = urlRequest.OriginalUrl,
-                ShortCode = shortnUrl,
-                ExpiresAt = DateTime.UtcNow.AddMinutes(expirationInMinutes).ToString("dd/MM/yyyy HH:mm:ss")
+                ShortCode = shorterUrl,
+                ExpiresAt = DateTime.UtcNow.AddSeconds(_urlExpirationInSeconds).ToString("dd/MM/yyyy HH:mm:ss")
             };
         }
 
-        public async Task<UrlResponse>  CompressUrlZstdAndSaveAsync(CreateURLRequest urlRequest)
+        public async Task<UrlResponse> CompressUrlZstdAndSaveAsync(CreateURLRequest urlRequest)
         {
-            var shortnUrl = _urlManagerService.CompressUrlWithZstd(urlRequest);
-            
+            var shorterUrl = _urlManagerService.CompressUrlWithZstd(urlRequest);
+
             return new UrlResponse()
             {
                 OriginalUrl = urlRequest.OriginalUrl,
-                ShortCode = shortnUrl,
+                ShortCode = shorterUrl,
                 ExpiresAt = ""
             };
         }

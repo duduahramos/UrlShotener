@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-url-redirect',
@@ -26,7 +27,7 @@ export class UrlRedirectComponent implements OnInit {
   }
 
   buscarUrlOriginal(): void {
-    const apiUrl = `http://localhost:5230/${this.shortCode}`;
+    const apiUrl = `${environment.apiUrl}/${this.shortCode}`;
 
     this.http.get<ShortnerResponse>(apiUrl).subscribe({
       next: (response) => {

@@ -35,25 +35,25 @@ export class UrlFormComponent {
         });
       },
       error: (err: HttpErrorResponse) => {
-        console.log('━━━━━━━━━━━━━━━━━━━━━━');
-        console.error('❌ ERRO NA REQUISIÇÃO!');
-        console.error('❌ Erro completo:', err);
-        console.error('❌ Status:', err.status);
-        console.error('❌ StatusText:', err.statusText);
-        console.error('❌ Message:', err.message);
-        console.error('❌ URL:', err.url);
-        console.log('━━━━━━━━━━━━━━━━━━━━━━');
+        // console.log('━━━━━━━━━━━━━━━━━━━━━━');
+        // console.error('❌ ERRO NA REQUISIÇÃO!');
+        // console.error('❌ Erro completo:', err);
+        // console.error('❌ Status:', err.status);
+        // console.error('❌ StatusText:', err.statusText);
+        // console.error('❌ Message:', err.message);
+        // console.error('❌ URL:', err.url);
+        // console.log('━━━━━━━━━━━━━━━━━━━━━━');
         
         this.error = `Erro: ${err.status} - ${err.statusText}`;
         this.isLoading = false;
       },
       complete: () => {
-        console.log('🔵 6. Requisição finalizada (complete)');
+        // console.log('🔵 6. Requisição finalizada (complete)');
       }
     });
     
-    console.log('🔵 7. Subscribe retornou:', subscription);
-    console.log('━━━━━━━━━━━━━━━━━━━━━━');
+    // console.log('🔵 7. Subscribe retornou:', subscription);
+    // console.log('━━━━━━━━━━━━━━━━━━━━━━');
   }
 
   limpar(): void {

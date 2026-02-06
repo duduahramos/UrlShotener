@@ -5,7 +5,6 @@ import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-url-result',
-  standalone: true,
   imports: [CommonModule],
   templateUrl: './url-result.html',
   styleUrl: './url-result.css',
@@ -28,8 +27,8 @@ export class UrlResultComponent {
   }
 
   copiar(): void {
-    navigator.clipboard.writeText(this.shortnerResponse?.shortCode || '');
-    alert('✅ URL copiada para área de transferência!');
+    navigator.clipboard.writeText(this.shortedUrl || '');
+    // alert('✅ URL copiada para área de transferência!');
   }
 
   novaUrl() {
